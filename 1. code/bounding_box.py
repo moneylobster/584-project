@@ -5,7 +5,7 @@ drawing = False # true if mouse is pressed
 ix,iy = -1,-1
 
 # mouse callback function
-def draw_rectanlge(event, x, y, flags, param):
+def draw_rectangle(event, x, y, flags, param):
     """ Draw rectangle on mouse click and drag """
     global ix,iy,drawing,mode
     # if the left mouse button was clicked, record the starting and set the drawing flag to True
@@ -31,7 +31,7 @@ def draw_rectanlge(event, x, y, flags, param):
 # create a black image (height=360px, width=512px), a window and bind the function to window
 img = cv2.imread("parrots.PNG")
 cv2.namedWindow('image') 
-cv2.setMouseCallback('image',draw_rectanlge)
+cv2.setMouseCallback('image',draw_rectangle)
 
 while(1):
     cv2.imshow('image',img)
