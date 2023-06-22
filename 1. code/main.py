@@ -102,4 +102,4 @@ def segment(imfile, name):
     plt.show()
 
 
-segment("images/balls.png")
+segment("images/balls.png", "balls")
