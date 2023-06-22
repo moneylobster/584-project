@@ -58,7 +58,13 @@ def main(imfile):
     plt.imshow(kmean3_res)
     plt.axis('off') 
     plt.title("kmeans 3d")
-    
+
+    # otsu
+    otsu_res, otsu_thresh=thresholding.otsu(img)
+    plt.subplot(2,2,5)
+    plt.imshow(otsu_res)
+    plt.axis('off')
+    plt.title("Otsu")
 
     plt.tight_layout()
     plt.show()
