@@ -36,7 +36,8 @@ def segment(imfile, name):
     print(f"Bounding box coordinates: {bbox}")
 
     # get number of clusters
-    cluster_num=int(input("Enter the number of clusters to segment into: "))
+    #cluster_num=int(input("Enter the number of clusters to segment into: "))
+    cluster_num=2
 
     plt.figure(figsize=(10,10))
     
@@ -112,6 +113,7 @@ def doall():
     for f in onlyfiles:
         name,ext = splitext(f)
         if ext==".jpg" or ext==".png":
+            print(f"segmenting {name}...")
             segment(f"images/{f}",name)
 
 #segment("images/balls.png", "balls")
