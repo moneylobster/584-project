@@ -30,33 +30,38 @@ def main(imfile):
 
     # get number of clusters
     cluster_num=int(input("Enter the number of clusters to segment into: "))
+
+    plt.figure(figsize=(10,10))
     
     # segment anything
     print("Running Segment Anything...")
     seg_res=segmentanything.do_bbox(img, np.array(bbox))
-    # plt.figure(figsize=(10, 10))
-    plt.subplots()
+    plt.subplot(2,2,1)
     plt.imshow(img)
     segmentanything.show_mask(seg_res[0], plt.gca())
     segmentanything.show_box(bbox, plt.gca())
     plt.axis('off')
-    plt.show()
+    plt.title("sam")
 
     # k-means 5-D
     print("Running k-means (5D)...")
-    kmean_res=kMeans_meanShift.Kmeans_segment(img, cluster_num)
-    # plt.figure(figsize=(10, 10))
-    plt.imshow(cv2.cvtColor(kmean_res.astype(np.uint8), cv2.COLOR_HSV2RGB))
+    kmean5_res=kMeans_meanShift.Kmeans5d_segment(img, cluster_num)
+    plt.subplot(2,2,2)
+    plt.imshow(kmean5_res)
     plt.axis('off')
-    plt.show()
+    plt.title("kmeans 5d")
 
     # k-means 3-D
-    # print("Running k-means (3D)...")
-    # kmean_res=kMeans_meanShift.Kmeans3d_segment(img, cluster_num)
-    # plt.figure(figsize=(10, 10))
-    # plt.imshow(cv2.cvtColor(kmean_res.astype(np.uint8), cv2.COLOR_HSV2RGB))
-    # plt.axis('off')
-    # plt.show()
+    print("Running k-means (3D)...")
+    kmean3_res=kMeans_meanShift.Kmeans3d_segment(img, cluster_num)
+    plt.subplot(2,2,3)
+    plt.imshow(kmean3_res)
+    plt.axis('off') 
+    plt.title("kmeans 3d")
+    
+
+    plt.tight_layout()
+    plt.show()
 
 
 main("images/balls.png")

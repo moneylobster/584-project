@@ -11,6 +11,7 @@ def normalization(img_orig):
     vectors = np.array(vectors)  
     normalized = MinMaxScaler(feature_range=(0,1)).fit_transform(vectors)
     return normalized
+
 def Kmeans3d_segment(img_orig, cluster_num):
     img = img_orig.copy()
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -29,8 +30,11 @@ def Kmeans3d_segment(img_orig, cluster_num):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
+    img_seg[:,:,0]=img_seg[:,:,0]*np.max(img[:,:,0])
+    img_seg[:,:,1]=img_seg[:,:,1]*np.max(img[:,:,1])
+    img_seg[:,:,2]=img_seg[:,:,2]*np.max(img[:,:,2])
     img_seg = cv2.cvtColor(img_seg.astype(np.uint8), cv2.COLOR_HSV2RGB)
-    return img_seg*255
+    return img_seg
 
 
 def Kmeans5d_segment(img_orig,cluster_num):
@@ -49,8 +53,11 @@ def Kmeans5d_segment(img_orig,cluster_num):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
+    img_seg[:,:,0]=img_seg[:,:,0]*np.max(img[:,:,0])
+    img_seg[:,:,1]=img_seg[:,:,1]*np.max(img[:,:,1])
+    img_seg[:,:,2]=img_seg[:,:,2]*np.max(img[:,:,2])
     img_seg = cv2.cvtColor(img_seg.astype(np.uint8), cv2.COLOR_HSV2RGB)
-    return img_seg*255
+    return img_seg
 
 
 def MeanShift_segment(img_orig):
@@ -73,5 +80,8 @@ def MeanShift_segment(img_orig):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
+    img_seg[:,:,0]=img_seg[:,:,0]*np.max(img[:,:,0])
+    img_seg[:,:,1]=img_seg[:,:,1]*np.max(img[:,:,1])
+    img_seg[:,:,2]=img_seg[:,:,2]*np.max(img[:,:,2])
     img_seg = cv2.cvtColor(img_seg.astype(np.uint8), cv2.COLOR_HSV2RGB)
-    return img_seg*255
+    return img_seg
