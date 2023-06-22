@@ -14,7 +14,8 @@ def normalization(img_orig):
 
 def Kmeans_segment(img_orig,cluster_num,normalized):
     img = img_orig.copy()
-    normalized = normalization(img_orig)  
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    normalized = normalization(img)
     kmeans = KMeans(n_clusters=cluster_num, random_state=0, n_init='auto').fit(normalized)
     labels = kmeans.labels_
     centers = kmeans.cluster_centers_
@@ -33,7 +34,8 @@ def Kmeans_segment(img_orig,cluster_num,normalized):
 
 def MeanShift_segment(img_orig):
     img = img_orig.copy()
-    normalized = normalization(img_orig)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    normalized = normalization(img)
     bandwidth = estimate_bandwidth(normalized, quantile=.04,n_samples=3000, n_jobs=-1)
     ms_1 = MeanShift(bandwidth = bandwidth , n_jobs=-1, bin_seeding=True, cluster_all=True).fit(normalized)
     labels = ms_1.labels_
