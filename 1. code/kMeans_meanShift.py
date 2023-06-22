@@ -23,11 +23,13 @@ def Kmeans3d_segment(img_orig, cluster_num):
     cluster_color = np.zeros((cluster_num, 3))
     for i in range(cluster_num):
         cluster_color[i, :] = np.mean(normalized[labels==i, :3], axis=0)
+    print(cluster_color)
     # create the segmented image
     img_seg = np.zeros(img.shape)
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
+    img_seg = cv2.cvtColor(img_seg.astype(np.uint8), cv2.COLOR_HSV2RGB)
     return img_seg*255
 
 
@@ -47,6 +49,7 @@ def Kmeans5d_segment(img_orig,cluster_num):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
+    img_seg = cv2.cvtColor(img_seg.astype(np.uint8), cv2.COLOR_HSV2RGB)
     return img_seg*255
 
 
@@ -70,5 +73,5 @@ def MeanShift_segment(img_orig):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
-            
+    img_seg = cv2.cvtColor(img_seg.astype(np.uint8), cv2.COLOR_HSV2RGB)
     return img_seg*255
