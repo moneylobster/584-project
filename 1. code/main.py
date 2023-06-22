@@ -78,6 +78,14 @@ def main(imfile):
     plt.axis('off')
     plt.title("Otsu")
 
+    # mean shift
+    print("Running mean shift...")
+    mean_shift_res= kMeans_meanShift.MeanShift_segment(img)
+    plt.subplot(plot_h,plot_w,6)
+    plt.imshow(mean_shift_res)
+    plt.axis('off')
+    plt.title("Mean Shift")
+
     plt.tight_layout()
     plt.show()
 
