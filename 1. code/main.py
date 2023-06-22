@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 
+from os import listdir
+from os.path import isfile, join, splitext
+
 # models
 import segmentanything
 import bounding_box
@@ -101,5 +104,15 @@ def segment(imfile, name):
     plt.savefig(f"results/{name}.png")
     plt.show()
 
+def doall():
+    '''run it for all the pics in images/
+    '''
+    mypath="images"
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    for f in onlyfiles:
+        name,ext = splitext(f)
+        if ext==".jpg" or ext==".png":
+            segment(f"images/{f}",name)
 
-segment("images/balls.png", "balls")
+#segment("images/balls.png", "balls")
+doall()
