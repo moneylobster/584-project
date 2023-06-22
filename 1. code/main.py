@@ -64,7 +64,7 @@ def segment(imfile, name):
     plt.subplot(plot_h,plot_w,2)
     plt.imshow(grabcut_res)
     plt.axis('off')
-    plt.title("GrabCut")
+    plt.title("GraphCut")
 
     # k-means 5-D
     print("Running k-means (5D)...")
