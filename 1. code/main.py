@@ -103,7 +103,7 @@ def segment(imfile, name):
 
     plt.tight_layout()
     plt.savefig(f"results/{name}.png")
-    plt.show()
+    #plt.show()
 
 def doall():
     '''run it for all the pics in images/
