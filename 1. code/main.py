@@ -14,7 +14,7 @@ import kMeans_meanShift
 import thresholding
 import grabcut
 
-def main(imfile):
+def segment(imfile, name):
     """segment image with multiple methods
 
     Parameters
@@ -39,14 +39,14 @@ def main(imfile):
     
     # original image
     # plt.subplot(plot_h,plot_w,1)
-    # plt.imshow(img)
+    # plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
     # plt.axis('off')
     # plt.title("Original Image")
 
 
     # segment anything
     print("Running Segment Anything...")
-    seg_res=segmentanything.do_bbox(img, np.array(bbox))
+    seg_res=segmentanything.do_bbox(cv2.cvtColor(img,cv2.COLOR_BGR2RGB), np.array(bbox))
     plt.subplot(plot_h,plot_w,1)
     plt.imshow(img)
     segmentanything.show_mask(seg_res[0], plt.gca())
@@ -98,7 +98,8 @@ def main(imfile):
 
 
     plt.tight_layout()
+    plt.savefig(f"results/{name}.png")
     plt.show()
 
 
-main("images/balls.png")
+segment("images/balls.png")
