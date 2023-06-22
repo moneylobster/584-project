@@ -33,10 +33,17 @@ def main(imfile):
 
     plt.figure(figsize=(10,10))
     
+    # original image
+    plt.subplot(2,2,1)
+    plt.imshow(img)
+    plt.axis('off')
+    plt.title("Original Image")
+
+
     # segment anything
     print("Running Segment Anything...")
     seg_res=segmentanything.do_bbox(img, np.array(bbox))
-    plt.subplot(2,2,1)
+    plt.subplot(2,2,2)
     plt.imshow(img)
     segmentanything.show_mask(seg_res[0], plt.gca())
     segmentanything.show_box(bbox, plt.gca())
@@ -46,7 +53,7 @@ def main(imfile):
     # k-means 5-D
     print("Running k-means (5D)...")
     kmean5_res=kMeans_meanShift.Kmeans5d_segment(img, cluster_num)
-    plt.subplot(2,2,2)
+    plt.subplot(2,2,3)
     plt.imshow(kmean5_res)
     plt.axis('off')
     plt.title("kmeans 5d")
@@ -54,7 +61,7 @@ def main(imfile):
     # k-means 3-D
     print("Running k-means (3D)...")
     kmean3_res=kMeans_meanShift.Kmeans3d_segment(img, cluster_num)
-    plt.subplot(2,2,3)
+    plt.subplot(2,2,4)
     plt.imshow(kmean3_res)
     plt.axis('off') 
     plt.title("kmeans 3d")
