@@ -25,7 +25,7 @@ def main(imfile):
 
     # get a bounding box
     print("Hold down the mouse to select a box, then press ESC")
-    bbox=bounding_box.start(img)
+    bbox=bounding_box.start(img.copy())
     print(f"Bounding box coordinates: {bbox}")
     
     # segment anything
