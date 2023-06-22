@@ -28,7 +28,7 @@ def Kmeans3d_segment(img_orig, cluster_num):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
-    return img_seg
+    return img_seg*255
 
 
 def Kmeans5d_segment(img_orig,cluster_num):
@@ -47,7 +47,7 @@ def Kmeans5d_segment(img_orig,cluster_num):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
-    return img_seg
+    return img_seg*255
 
 
 def MeanShift_segment(img_orig):
@@ -71,4 +71,4 @@ def MeanShift_segment(img_orig):
         for j in range(img.shape[1]):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
             
-    return img_seg
+    return img_seg*255
