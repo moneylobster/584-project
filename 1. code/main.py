@@ -12,6 +12,7 @@ import bounding_box
 
 import kMeans_meanShift
 import thresholding
+import grabcut
 
 def main(imfile):
     """segment image with multiple methods
@@ -37,21 +38,29 @@ def main(imfile):
     plt.figure(figsize=(10,10))
     
     # original image
-    plt.subplot(plot_h,plot_w,1)
-    plt.imshow(img)
-    plt.axis('off')
-    plt.title("Original Image")
+    # plt.subplot(plot_h,plot_w,1)
+    # plt.imshow(img)
+    # plt.axis('off')
+    # plt.title("Original Image")
 
 
     # segment anything
     print("Running Segment Anything...")
     seg_res=segmentanything.do_bbox(img, np.array(bbox))
-    plt.subplot(plot_h,plot_w,2)
+    plt.subplot(plot_h,plot_w,1)
     plt.imshow(img)
     segmentanything.show_mask(seg_res[0], plt.gca())
     segmentanything.show_box(bbox, plt.gca())
     plt.axis('off')
     plt.title("Segment Anything")
+
+    # grabcut
+    print("Running GrabCut...")
+    grabcut_res=grabcut.grabcut_segment(img, bbox)
+    plt.subplot(plot_h,plot_w,2)
+    plt.imshow(grabcut_res)
+    plt.axis('off')
+    plt.title("GrabCut")
 
     # k-means 5-D
     print("Running k-means (5D)...")
@@ -85,6 +94,8 @@ def main(imfile):
     plt.imshow(mean_shift_res)
     plt.axis('off')
     plt.title("Mean Shift")
+
+
 
     plt.tight_layout()
     plt.show()
