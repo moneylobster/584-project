@@ -45,7 +45,7 @@ def main(imfile):
     print("Running k-means...")
     kmean_res=kMeans_meanShift.Kmeans_segment(img, cluster_num)
     plt.figure(figsize=(10, 10))
-    plt.imshow(cv2.cvtColor(kmean_res, cv2.COLOR_HSV2RGB))
+    plt.imshow(cv2.cvtColor(kmean_res.astype(np.uint8), cv2.COLOR_HSV2RGB))
     plt.axis('off')
     plt.show()
 
