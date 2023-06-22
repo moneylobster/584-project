@@ -12,7 +12,7 @@ def normalization(img_orig):
     normalized = MinMaxScaler(feature_range=(0,1)).fit_transform(vectors)
     return normalized
 
-def Kmeans_segment(img_orig,cluster_num,normalized):
+def Kmeans_segment(img_orig,cluster_num):
     img = img_orig.copy()
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     normalized = normalization(img)
