@@ -48,7 +48,7 @@ def segment(imfile, name):
     print("Running Segment Anything...")
     seg_res=segmentanything.do_bbox(cv2.cvtColor(img,cv2.COLOR_BGR2RGB), np.array(bbox))
     plt.subplot(plot_h,plot_w,1)
-    plt.imshow(img)
+    plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
     segmentanything.show_mask(seg_res[0], plt.gca())
     segmentanything.show_box(bbox, plt.gca())
     plt.axis('off')
@@ -56,7 +56,7 @@ def segment(imfile, name):
 
     # grabcut
     print("Running GrabCut...")
-    grabcut_res=grabcut.grabcut_segment(img, bbox)
+    grabcut_res=grabcut.grabcut_segment(cv2.cvtColor(img,cv2.COLOR_BGR2RGB), bbox)
     plt.subplot(plot_h,plot_w,2)
     plt.imshow(grabcut_res)
     plt.axis('off')
