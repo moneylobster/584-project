@@ -104,7 +104,7 @@ def do_bbox(image, bbox_coords):
         point_coords=None,
         point_labels=None,
         box=bbox_coords[None, :],
-        multimask_output=False,
+        multimask_output=True,
     )
 
     return masks

@@ -15,6 +15,7 @@ def normalization(img_orig):
 def Kmeans_segment(img_orig,cluster_num):
     img = img_orig.copy()
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    img_flattened=np.array([img[i, j, :].tolist() + [i, j] for i in range(img.shape[0]) for j in range(img.shape[1])])
     normalized = normalization(img)
     kmeans = KMeans(n_clusters=cluster_num, random_state=0, n_init='auto').fit(normalized)
     labels = kmeans.labels_
@@ -22,7 +23,7 @@ def Kmeans_segment(img_orig,cluster_num):
     # find the color of each cluster
     cluster_color = np.zeros((cluster_num, 3))
     for i in range(cluster_num):
-        cluster_color[i, :] = np.mean(normalized[labels==i, :3], axis=0)
+        cluster_color[i, :] = np.mean(img_flattened[labels==i, :3], axis=0)
     print(cluster_color)
     # create the segmented image
     img_seg = np.zeros(img.shape)
@@ -54,6 +55,3 @@ def MeanShift_segment(img_orig):
             img_seg[i, j, :] = cluster_color[labels[i*img.shape[1]+j], :]
             
     return img_seg
-
-
-
